@@ -1,0 +1,45 @@
+
+h1{
+	color : white;
+	text-align : center; 
+}
+
+body{
+	background : url(img/main_background.jpg) top left no-repeat;
+	background-size : cover
+}
+
+div{
+	margin: auto;
+	width : 350px;
+	height : 120px;
+	border : solid 1px;
+	text-align : center;
+	font-size : 50px;
+	background-color : white;
+}
+
+.matching, .information, .List{
+	font-weight : bold;
+	font-size : 30px;
+	width : 150px;
+	height : 50px;       
+}
+
+img{
+	align : center;
+	margin-left: auto;
+	margin-right: auto;
+	padding :10px; 
+	width : 350px;
+	display: block;
+	height : 200px;
+}
+
+.showdata{
+	font-size : 10px;	
+}
+
+#warming{
+	color : red;
+}

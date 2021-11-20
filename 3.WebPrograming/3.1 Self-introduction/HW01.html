@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <link rel = "styleSheet" href="HW01.css">
+    <title>김진섭의 소개 페이지</title>
+  </head>
+  <body>
+    <div class = "Title"> 김진섭의 소개 페이지 </div>
+    <header class = "subject">
+      <h1>1.page를 만든 이유 및 소개</h1>
+      <h2>2.김진섭을 소개</h2>
+      <h3>3.관심 분야 소개</h3>
+    </header>
+
+    <div id = "page_intro">
+      <h4>1.페이지 소개</h4>
+      <p>페이지를 만든 이유는 과제를 수행하기 위함입니다.</p>
+      <p>이 페이지는 저의 소개를 하기 위한 페이지입니다.</p>
+    </div>
+    <div id = "man_intro">
+      <h4>2.본인 소개</h4>
+      <div>
+        <p>- 재학중인 대학교 : 충남대학교</p>
+        <p>- 학과 : 컴퓨터 공학과</p>
+        <p>- 현재 학년 : 3학년 </p>
+      </div>
+    </div>
+      <table>
+        <caption>&lt;<span id = "Ta">2018년 1학기</span> 시간표&gt;</caption>
+        <thead>
+          <tr>
+           <th></th>
+           <th>월</th>
+           <th>화</th>
+           <th>수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class ="day">1교시</td>
+            <td rowspan="2" class = "sub">웹프로그래밍</td>
+            <td class = "sub">군사학</td>
+            <td class = "sub">데이터 통신</td>
+          </tr>
+          <tr>
+            <td class ="day">2교시</td>
+            <td rowspan= "2" class = "sub">운영체제</td>
+            <td rowspan ="2" class = "sub">프로그래밍 언어</td>
+          </tr>
+          <tr>
+            <td class ="day">3교시</td>
+            <td class = "sub">군사학</td>
+          </tr>
+        </tbody>
+      </table>
+        <img src="HW01.jpg" alt = "저의 사진입니다.">
+    <div id = "show">
+      <h4>3.관심 분야 소개</h4>
+      <p>-학업 분야</p>
+      <pre>
+        관심있는 분야는 통신과, iot입니다.
+        그래서 대학교에 와서 데이터 통신을 공부하며, 라즈베리파이 스터디를 하며 공부를 합니다.
+        그리고 새로운 도전으로 웹프로그래밍을 공부하고 있습니다.
+      </pre>
+      <p>-라즈베리 파이와 아두이노 </p>
+      <pre>
+        라즈베리 파이는 소형 컴퓨터 역할을 수행합니다.
+        아두이노는 단순한 센서를 사용하여 무엇인가를 만들 수 있습니다.
+      </pre>
+      <p>-Google</p>
+      <pre>
+        공부를하다 해결을 못한 내용이 있으면, Google을 이용하면 됩니다.
+      </pre>
+      <p>-개인적인 공부 환경</p>
+      <div id = "study_show">
+        생활코딩을 이용하면 혼자 컴퓨터를 공부하기 용이합니다.<br>
+        아래에 생활코딩과 관련하여 제가 개인적으로 들은 링크와,<br>
+        생활코딩의 소개를 간단히 넣어둘태니 확인해 보시길 바랍니다.<br>
+      </div>
+      <!--즐겨찾는 페이지 ifram으로 표현-->
+      <iframe src="https://opentutorials.org/" width="1300" height="800"></iframe>
+    </div>
+    <article>
+      <h4>생활 코딩 소개 - 출처 : 생활코딩</h4>
+      <div id = "article">
+      생활코딩의 세계에 오신 것을 환영합니다.<br>
+      생활코딩은 일반인들에게 프로그래밍을 알려주는 무료 온라인, 오프라인 수업입니다.<br>
+      어떻게 공부할 것인가를 생각해보기 전에 왜 프로그래밍을
+      공부하는 이유에 대한 이유를 함께 생각해보면 좋을 것 같습니다.<br>
+      ... 이하 생략
+    </div>
+      <p>생활 코딩의 들었던 강좌 링크</p>
+      <!--리스트를 이용하여 좋아하는 페이지 링크 순서 없는 리스트 들여쓰기, -->
+      <ul id = "opentutorials">
+        <li class = "opentutorialsList"><a href="https://opentutorials.org/course/1750">Python</a></li>
+        <li class = "opentutorialsList"><a href="https://opentutorials.org/course/3">HTML</a></li>
+        <li class = "opentutorialsList"><a href="https://opentutorials.org/course/4">CSS</a></li>
+      </ul>
+    </article>
+
+    <nav>
+      <div class = "go">바로가기</div>
+      <div><a href = "#page_intro"> -페이지 소개 </a></div>
+      <div><a href = "#man_intro"> -인물 소개 </a></div>
+      <div><a href = "#show"> -관심 분야 </a></div>
+    </nav>
+    <footer>
+      저의 페이지를 찾아 주셔서 감사합니다.
+    </footer>
+
+  </body>
+</html>

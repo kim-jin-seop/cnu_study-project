@@ -1,0 +1,27 @@
+h1{
+	color : white;
+	text-align : center; 
+	font-size : 100px;
+}
+
+body{
+	background-color : black;
+}
+
+div{
+	background-color : white;
+	text-align : center;
+	font-size : 30px;
+}
+
+input{
+	font-weight : bold;
+	font-size : 19px;
+	float : right;
+	width : 150px;
+	height : 100px;
+}
+
+p{
+	color : red;
+}

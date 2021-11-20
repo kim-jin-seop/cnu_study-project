@@ -1,0 +1,17 @@
+body{
+background : url("img/InputData_background.jpg");
+background-size : cover; 
+font-size : 20px;
+}
+
+form{
+	border : solid 1px;
+	color : white;
+	background-color : black;
+}
+
+h1{
+	color : blue;
+	background-color : black;
+	text-align :center;
+}

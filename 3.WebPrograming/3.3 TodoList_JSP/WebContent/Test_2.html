@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html id ="Html" lang="ko">
+<head>
+<meta charset="UTF-8" >
+<title>TodoList</title>
+<!-- CSS, JS External 정의 -->
+<link rel="stylesheet" type="text/css" href="Test_2.css">
+<script src='Test.js'></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body onload = "updata()">
+	<article>
+		<header>
+			<!-- Header (Add ToDo 버튼, keyword 검색) -->
+			<button class="add_button"  onclick = "opentheAdd()">Add ToDo</button>
+			<select class="find_day" id = "Find_Day" name = "day">
+				<option value = "Day" selected>day</option>
+				<option value = "Mon">MonDay</option>
+				<option value = "Tue">TuesDay</option>
+				<option value = "Wed">WednesDay</option>
+				<option value = "Thu">ThursDay</option>
+				<option value = "Fri">FriDay</option>
+			</select>
+			<input id = "Find_Data" class="find_key" onkeypress = "onEnter()" type = "text" placeholder = "Enter your keyword here"><br>
+			최종 수정 : <span id = "time">요일 월 일 년도 시간 분 초  GMT+0900 (대한민국 표준시)</span>
+			<button class="removebutton"  onclick = "selectRemove()">Remove</button>
+		</header>
+		<!-- add 다이아로그 -->
+		<dialog>
+		<img alt= "사진이 안보입니다." src="img/delete.png" onclick = "closetheAdd()">
+			<form name = myForm id = "dialog">
+				<select id = "dayselect" name = "day" class = "day">
+					<option value = "Mon" selected>MonDay</option>
+					<option value = "Tue">TuesDay</option>
+					<option value = "Wed">WednesDay</option>
+					<option value = "Thu">ThursDay</option>
+					<option value = "Fri">FriDay</option>
+				</select><br>
+				<input id = "inputTitle" class = "title" type = "text" name = "Title" placeholder = "제목을 입력하시오"><br>
+				<textarea placeholder = "내용을 입력하세요" id = "inputContents" name = "content" class = "contents"></textarea><br>
+				<input id = "add_data" class = "submitbutton" type="button" value = "Add" onclick = "add()">
+			</form>
+		</dialog>
+
+		<!--수정 다이아로그 -->
+		<dialog id = m>
+			<img alt= "사진이 안보입니다." src="img/delete.png" onclick = "closethemodify()">
+			<form name = modify_Form>
+				<input id = "modifyTitle" class = "m_title" type = "text"><br>
+				<textarea id = "modifyContents" class = "m_Contents"></textarea><br>
+				<input class = "modifybutton" type="button" value ="수정" onclick = "modify()">
+			</form>
+		</dialog>
+		<main>
+			<!-- Middle Bar A~D, Display Area A~D -->
+			<div class="mainLine"></div>
+			<section id="middleBar_mon" class="middle">
+				<h6 style = "text-align : center; color : red;">월요일 list</h6>
+				<section class="middleTop"><h4><Strong>mon</Strong></h4></section>
+				<section ondragover= allowDrop(event) ondrop = emptydrop(event) class="displayArea_mon"><h5><b>월요일 목록</b></h5><div id="MonList"></div></section>
+			</section>
+			<div class="mainLine"></div>
+			<section id="middleBar_tue" class="middle">
+				<h6 style = "text-align : center; color : orange;">화요일 list</h6>
+				<section class="middleTop"><h4><Strong>tue</Strong></h4></section>
+				<section ondragover= allowDrop(event) ondrop = emptydrop(event) class="displayArea_tue"><h5><b>화요일 목록</b></h5><div id="TueList"></div></section>
+			</section>
+			<div class="mainLine"></div>
+			<section id="middleBar_wed" class="middle">
+				<h6 style = "text-align : center; color : yellow;">수요일 list</h6>
+				<section class="middleTop"><h4><Strong>wed</Strong></h4></section>
+				<section ondragover= allowDrop(event) ondrop = emptydrop(event) class="displayArea_wed"><h5><b>수요일 목록</b></h5><div id="WedList"></div></section>
+			</section>
+			<div class="mainLine"></div>
+			<section id="middleBar_thu" class="middle">
+				<h6 style = "text-align : center; color : green;">목요일 list</h6>
+				<section class="middleTop"><h4><Strong>thu</Strong></h4></section>
+				<section ondragover= allowDrop(event) ondrop = emptydrop(event) class="displayArea_thu"><h5><b>목요일 목록</b></h5><div id="ThuList"></div></section>
+			</section>
+			<div class="mainLine"></div>
+			<section id="middleBar_Fri" class="middle">
+				<h6 style = "text-align : center; color : blue">금요일 list</h6>
+				<section class="middleTop"><h4><Strong>Fri</Strong></h4></section>
+				<section ondragover= allowDrop(event) ondrop = emptydrop(event) class="displayArea_Fri"><h5><b>금요일 목록</b></h5><div id="FriList"></div></section>
+			</section>
+		</main>
+			<h5>TodoList #1 TermProject - 201601989 김진섭</h5>
+	</article>
+</body>
+</html>

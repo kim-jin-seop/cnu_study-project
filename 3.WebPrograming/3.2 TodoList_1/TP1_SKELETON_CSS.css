@@ -1,0 +1,242 @@
+@CHARSET "UTF-8";
+
+html{
+	height: 100%;
+}
+
+img{
+	width: 25px;
+	height: 25px;
+	float: right;
+	margin: 5px 5px;
+}
+
+body{
+	background-color: #ffffff;
+	height: 100%;
+	width: 900px;
+	border: 1px solid;
+	margin: auto;
+	padding: 20px 30px 20px 30px;
+}
+
+article{
+	background-color: #ffffff;
+	height: 100%;
+	border-style: none;
+}
+
+/* Header Start */
+header{
+	background-color: #ffc000;
+	line-height:60px;
+	width: 800px;
+	border: 1px solid;
+	border-radius: 10px;
+	margin: auto;
+	padding: 10px;
+	text-align: center;
+}
+/* Header End */
+
+/* Main Start */
+main{
+	background-color: #ffffff;
+	height: 90%;
+	width: 800px;
+	margin: auto;
+	padding: 10px;
+}
+
+.middle{
+	float: left;
+	height: 98%;
+	width: 18%;
+	margin: 7px;
+}
+
+.middleTop{
+	line-height:10px;
+	text-align: center;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+
+.displayArea_mon{
+	background-color: #cfe0e0;
+	height: 85%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.displayArea_tue{
+	background-color: #e9b7b7;
+	height: 85%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.displayArea_wed{
+	background-color: #cce0e0;
+	height: 85%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.displayArea_thu{
+	background-color: #e2ddc0;
+	height: 85%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.displayArea_Fri{
+	background-color: skyblue;
+	height: 85%;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.mainLine{
+	float: left;
+	height: 100%;
+	border-right: 1px solid;
+}
+
+/* Main End */
+
+/*header의 추가*/
+/*add 버튼처리*/
+.add_button{
+	background-color : pink;
+	font-size : 45px;
+	font-weight : bold;
+	border-radius: 8px;
+	float : left;
+}
+
+/*찾기 요일, keyWord*/
+.find_day, .find_key{
+	border-radius: 8px;
+	position:relative;
+	right : -90px;
+	font-size : 20px;
+}
+/*header의 추가 End*/
+
+
+/*다이아로그 꾸미기*/
+dialog{
+	display : none;
+	border : 1px solid rgba(0,0,0,0.3);
+	border-radius : 6px;
+	box-shadow : 0 3px 7px rgba(0,0,0,0.3);
+}
+.day{
+	float: left;
+	width: 300px;
+	border-radius: 8px;
+	margin-bottom: 4px;
+	border-color : black;
+	font-weight : bold;
+}
+.title{
+	float: left;
+	width: 300px;
+	border-radius: 8px;
+	margin-bottom: 4px;
+	border-color : black;
+	font-weight : bold;
+}
+.contents{
+	border-color : black;
+	float: left;
+	width: 300px;
+	height:80px;
+	border-radius: 8px;
+	margin-bottom: 6px;
+	font-weight : bold;
+}
+
+.submitbutton{
+	float: right;
+	width: 100px;
+	border-radius: 8px;
+	border-color : black;
+	font-weight : bold;
+}
+
+.list{
+	width: 140px;
+	border: 1px solid;
+	text-align : center;
+}
+
+
+
+/*수정하는 dialog*/
+
+.m_day{
+	float: left;
+	width: 300px;
+	border-radius: 8px;
+	border-color : black;
+	font-weight : bold;
+}
+
+.modifyIndexNumber{
+	float: left;
+	width: 300px;
+	border-radius: 8px;
+	border-color : black;
+	font-weight : bold;
+}
+
+.m_title{
+	float: left;
+	width: 300px;
+	border : 2px solid;
+	border-radius: 4px;
+	border-color : black;
+	font-weight : bold;
+}
+
+.m_Contents{
+	border-color : black;
+	float: left;
+	width: 300px;
+	height:80px;
+	border-radius: 8px;
+	margin-bottom: 6px;
+	font-weight : bold;
+}
+
+.modifybutton{
+	float: right;
+	width: 100px;
+	border-radius: 8px;
+	border-color : black;
+	font-weight : bold;
+}
+
+.list{
+	width: 135px;
+	height: 75px;
+	border: 5px solid;
+	text-align : left;
+}
+
+
+.remove{
+	float: right;
+}
+
+.modify{
+	float: right;
+}
+
+.findCancel{
+	position : relative;
+	top : 25px;
+	left : 15px;
+}

@@ -1,0 +1,23 @@
+body{
+	background : url(img/main_background.jpg) top left no-repeat;
+	background-size : cover
+}
+
+h1{
+	color : white;
+	text-align : center;	
+}
+
+h4{
+	color : blue
+}
+
+div{
+	background-color : white;
+	text-align : center;
+	border : solid 2px;
+}
+
+h3{
+	color : red;
+}

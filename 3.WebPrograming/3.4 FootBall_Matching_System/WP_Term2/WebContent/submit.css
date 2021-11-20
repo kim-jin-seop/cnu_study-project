@@ -1,0 +1,21 @@
+
+h1{
+	color : blue;
+	font-size : 30px;	
+}
+
+p{
+	color : white;
+	font-size : 20px;
+}
+
+body{
+	background :  url(img/submit_background.jpg) no-repeat;
+	background-size : cover;
+}
+
+.data{
+	border : solid 1px;
+	background-color : black;
+	text-align : center;
+}
