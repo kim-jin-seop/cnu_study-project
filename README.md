@@ -48,7 +48,7 @@ use next-fit & First-fit
 
 --------
 
-# 3. TermProject_StoreSystem
+# 4. TermProject_StoreSystem
 
 ## 모바일 프로그래밍 및 설계 TermProject(2018-가을학기)
 판매업체와 기업의 재고를 관리하는데 도움을 주는 어플리케이션
