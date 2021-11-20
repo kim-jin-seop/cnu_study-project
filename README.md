@@ -15,13 +15,13 @@
 ## 시스템 프로그래밍 Lab(2017-가을학기)
 ### 충남대학교 컴퓨터공학과 김진섭
 
-## SystemPrograming_Shell
+## Shell Lab
 
 Signal을 사용하여, 리눅스의 Shell을 구현.
 
 카네기멜론 대학의 shlab
 
-## SystemPrograming_Malloc
+## Malloc Lab
 
 Malloc Lab
 for System Programing HomeWork
