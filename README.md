@@ -10,8 +10,27 @@
 
 여행을 가서 일정을 기록하는 다이어리 안드로이드 어플리케이션
 
+----------
+# 2. SystemPrograming_Lab
+## 시스템 프로그래밍 Lab(2017-가을학기)
+### 충남대학교 컴퓨터공학과 김진섭
 
-# 2. TermProject_StoreSystem
+## SystemPrograming_Shell
+
+Signal을 사용하여, 리눅스의 Shell을 구현.
+
+카네기멜론 대학의 shlab
+
+## SystemPrograming_Malloc
+
+Malloc Lab
+for System Programing HomeWork
+
+use next-fit & First-fit
+
+--------
+
+# 3. TermProject_StoreSystem
 
 ## 모바일 프로그래밍 및 설계 TermProject(2018-가을학기)
 ### 충남대학교 컴퓨터공학과 김진섭 
