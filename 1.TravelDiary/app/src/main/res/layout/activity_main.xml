@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1.5"
+    android:background="@drawable/background"
+    >
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:weightSum="1"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ivImage"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="top"
+            />
+        <TextView
+            android:text="No Image"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tvStatus"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="top"/>
+    </FrameLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_gravity="bottom">
+
+        <EditText
+            android:hint="이번 여행의 제목을 지어 보세요"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id ="@+id/ImageTitle"
+            android:textColor="#FFFFFF"
+            />
+
+        <EditText
+            android:hint="이번 여행에 대해서 적어 주세요"
+            android:gravity="top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ImageName"
+            android:layout_gravity="bottom"
+            android:textColor="#FFFFFF"
+            />
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:weightSum="2"
+        android:layout_gravity="bottom">
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/btnLoad"
+            android:text="이미지 불러오기" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/btnSave"
+            android:text="저장" />
+    </LinearLayout>
+
+</LinearLayout>

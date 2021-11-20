@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.kimjinseop.termp">
+
+
+    <uses-permission android:name="com.tistory.webnautes.googlemap.locationapi.maps.permission.MAPS_RECEIVE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission."/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-feature
+
+        android:glEsVersion="0x00020000"
+
+        android:required="true" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        >
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC_Wngb0h9J3yIX5-u5lo8IosUNFJgriaQ" />
+        
+
+
+        <activity
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:name=".SplashActivity"
+            android:label="TravelDiary"
+            android:icon="@drawable/mainicon2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--<activity-->
+            <!--android:name=".SplashActivity"-->
+            <!--android:theme="@style/SplashTheme"-->
+            <!--android:screenOrientation="portrait">-->
+
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action."/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".alone_list"
+        android:label="diary_list"></activity>
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".family_list"
+        android:label="diary_list"></activity>
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".friend_list"
+        android:label="diary_list"></activity>
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".group_list"
+        android:label="diary_list"></activity>
+
+
+
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".select"
+        android:label="activity_select"></activity>
+
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".alone"
+        android:label="activity_alone"></activity>
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".family"
+        android:label="activity_family"></activity>
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".friend"
+        android:label="activity_friend"></activity>
+
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".group"
+        android:label="activity_group"></activity>
+    <activity
+        android:theme="@style/AppTheme"
+        android:name=".search"
+        android:label="검색"></activity>
+    <activity
+        android:theme="@style/AppTheme"
+        android:name=".search_list"
+        android:label="검색 결과"></activity>
+    <activity
+        android:theme="@style/AppTheme"
+        android:name=".setting"
+        android:label="설정"></activity>
+
+
+
+    <activity
+        android:theme="@style/AppTheme"
+        android:name=".language"
+        android:label="언어"></activity>
+    <activity
+        android:theme="@style/AppTheme"
+        android:name=".password"
+        android:label="비밀번호 설정"></activity>
+    <activity
+        android:theme="@style/AppTheme"
+        android:name=".help"
+        android:label="도움말"></activity>
+
+
+    <activity
+        android:theme="@style/AppTheme"
+        android:name=".Insert_password"
+        android:windowSoftInputMode="stateAlwaysHidden"
+        android:label="비밀번호 설정">
+    </activity>
+
+
+
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".add_alone"
+        android:label="activity_main">
+    </activity>
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".add_family"
+        android:label="activity_main">
+    </activity>
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".add_friend"
+        android:label="activity_main">
+    </activity>
+    <activity
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".add_group"
+        android:label="activity_main">
+    </activity>
+    <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+ App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+
+
+</manifest>

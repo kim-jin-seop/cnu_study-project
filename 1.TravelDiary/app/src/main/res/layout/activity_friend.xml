@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.kimjinseop.termp.myapplication.FirstMap" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:id="@+id/button"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/selectbutton1" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:id="@+id/button4"
+        android:text="경로만들기"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="100dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/Text"
+        />
+
+</RelativeLayout>
