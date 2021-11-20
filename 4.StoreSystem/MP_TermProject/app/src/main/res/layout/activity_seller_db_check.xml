@@ -1,0 +1,146 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.kimjinseop.mp_termproject.TableActivity"
+    android:id="@+id/activity_table"
+    >
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="42dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="닫기"
+        android:id="@+id/button7"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button7"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="close"
+        android:text="닫기" />
+
+    <Button
+        android:id="@+id/addmode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button8"
+        android:layout_toEndOf="@+id/button8"
+        android:layout_toRightOf="@+id/button8"
+        android:onClick="process"
+        android:text="처리완료" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tableLayout"
+        android:layout_toEndOf="@+id/textView10"
+        android:layout_toRightOf="@+id/textView10"
+        android:text="주문리스트"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="주문내역관리"
+        android:textColor="#0000FF"
+        android:textSize="20dp" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menuList"
+        android:layout_toEndOf="@+id/addmode"
+        android:layout_toRightOf="@+id/addmode"
+        android:layout_below="@+id/tableLayout"
+        android:layout_above="@+id/removemode"
+        android:background="#FFD9FA" />
+
+    <Button
+        android:id="@+id/removemode"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignBottom="@+id/addmode"
+        android:layout_toRightOf="@+id/addmode"
+        android:onClick="delete"
+        android:text="." />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/menutext"
+        android:layout_alignTop="@+id/menuList"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/pricetext"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tableLayout"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="3dp"
+        android:layout_toStartOf="@+id/nametext"
+        android:layout_toLeftOf="@+id/nametext"
+        android:layout_toEndOf="@+id/menutext"
+        android:layout_toRightOf="@+id/menutext"
+        android:text="New Text" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button7"
+        android:layout_alignBottom="@+id/textView6"
+        android:text="상품" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/pricetext"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="0dp"
+        android:text="개수" />
+
+</RelativeLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/image4"
+    android:gravity="center_horizontal|center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|center"
+            android:textSize="40dp"
+            android:text="판매업체" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_enroll"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:onClick="isClick_Enroll"
+            android:text="재고등록" />
+
+        <Button
+            android:id="@+id/btn_checkcount"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:onClick="isClick_ShowInventory"
+            android:text="재고현황확인" />
+
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:onClick="isClick_add"
+            android:text="재고발주" />
+
+        <Button
+            android:id="@+id/btn_inputitem"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonshape"
+            android:color="@android:color/black"
+            android:onClick="isClick_AddProduct"
+            android:text="자동발주" />
+    </LinearLayout>
+
+</LinearLayout>

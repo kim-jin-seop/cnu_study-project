@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="company">
+        <item>회사 선택</item>
+        <item>(주)농심</item>
+    </string-array>s
+</resources>
