@@ -5,7 +5,6 @@
 
 # 1. TermProject_TravelDiary
 ## 객체지향설계 TermProject(2017-가을학기)
-### 충남대학교 컴퓨터공학과 김진섭
 객체지향 설계 자유주제 Term Project
 
 여행을 가서 일정을 기록하는 다이어리 안드로이드 어플리케이션
@@ -13,7 +12,6 @@
 ----------
 # 2. SystemPrograming_Lab
 ## 시스템 프로그래밍 Lab(2017-가을학기)
-### 충남대학교 컴퓨터공학과 김진섭
 
 ## Shell Lab
 
@@ -30,10 +28,29 @@ use next-fit & First-fit
 
 --------
 
+# 3. WebPrograming_Project
+## 웹프로그래밍(2018년-봄학기)
+## Self-introduction
+- HTML, CSS  
+- 자기소개 웹페이지
+
+## TodoList_1
+- HTML, CSS, java script
+- 주간계획을 삽입, 수정, 삭제할 수 있는 TodoList
+
+## TodoList_JSP
+- JSP, CSS, java script, html
+- TodoList를 jsp로 구현
+
+## FootBall_Matching_System
+- JSP, CSS, java script, html
+- 충남대학교 풋살매칭 웹페이지 개발
+
+--------
+
 # 3. TermProject_StoreSystem
 
 ## 모바일 프로그래밍 및 설계 TermProject(2018-가을학기)
-### 충남대학교 컴퓨터공학과 김진섭 
 판매업체와 기업의 재고를 관리하는데 도움을 주는 어플리케이션
 
 ### 제품 소개
