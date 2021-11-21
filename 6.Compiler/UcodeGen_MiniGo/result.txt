@@ -1,0 +1,39 @@
+           sym 1 1 1
+main       proc 0 2 2
+           ldc UseIf
+           ldc 7
+           ret
+           end
+UseIf      proc 2 2 2
+           sym 2 1 1
+           sym 2 2 1
+           lod 2 1
+           str 2 2
+           lod 2 2
+           ldc 7
+           eq
+           fjp $$1
+           ldp
+           call UseFor
+$$1        nop
+           ret
+           end
+UseFor     proc 1 2 2
+           sym 2 1 1
+           ldc 3
+           str 2 1
+$$Loop2    nop
+           lod 2 1
+           ldc 10
+           lt
+           fjp $$End2
+           ldc 10
+           str 2 1
+           ujp $$Loop2
+$$End2     nop
+           ret
+           end
+           bgn 1
+           ldp
+           call main
+           end

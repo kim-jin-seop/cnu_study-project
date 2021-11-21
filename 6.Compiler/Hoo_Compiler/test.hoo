@@ -1,0 +1,21 @@
+[abc] : print
+[abc] : ignore
+[abc] : (3) print
+[] : print
+[abc] :
+[def]:
+[ghi] : print
+[abcb][e/b] : print
+[abcb][U] : print
+[aBCB][L] : print
+[abc] :
+[def][e/f] :
+[ghi][h/i]:(2)print
+[U]:
+[L]:(2)
+[D]:print
+[abc]:
+[abcb][e/b]:print
+[abc]:
+[def]: ignore
+[ghi]: print
