@@ -1,0 +1,4 @@
+7
+ABCBDAB
+6
+BDCABA
