@@ -1,0 +1,205 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1000;
+            height: 1000;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+        #loadingBar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 1000;
+            height: 1000;
+            background-color:rgba(200,200,200,0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:20px;
+            height:20px;
+            margin:auto auto auto auto;
+            border-radius:11px;
+            border:2px solid rgba(30,30,30,0.05);
+            background: rgb(0, 173, 246); /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+        }
+
+        #border {
+            position:absolute;
+            top:10px;
+            left:10px;
+            width:500px;
+            height:23px;
+            margin:auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+            border-radius:10px;
+        }
+
+        #text {
+            position:absolute;
+            top:8px;
+            left:530px;
+            width:30px;
+            height:50px;
+            margin:auto auto auto auto;
+            font-size:22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position:relative;
+            top:400px;
+            width:600px;
+            height:44px;
+            margin:auto auto auto auto;
+            border:8px solid rgba(0,0,0,0.1);
+            background: rgb(252,252,252); /* Old browsers */
+            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+            border-radius:72px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+<div id="loadingBar">
+    <div class="outerBorder">
+        <div id="text">0%</div>
+        <div id="border">
+            <div id="bar"></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "\uae30\uc0dd\ucda9", "label": "\uae30\uc0dd\ucda9", "shape": "dot"}, {"id": "\uc1a1\uac15\ud638\n", "label": "\uc1a1\uac15\ud638\n", "shape": "dot"}, {"id": "\uc6b0\uc544\ud55c \uc138\uacc4", "label": "\uc6b0\uc544\ud55c \uc138\uacc4", "shape": "dot"}, {"id": "\uc124\uad6d\uc5f4\ucc28", "label": "\uc124\uad6d\uc5f4\ucc28", "shape": "dot"}, {"id": "\uc0ac\ub3c4", "label": "\uc0ac\ub3c4", "shape": "dot"}, {"id": "\ub9c8\uc57d\uc655", "label": "\ub9c8\uc57d\uc655", "shape": "dot"}, {"id": "\uad34\ubb3c", "label": "\uad34\ubb3c", "shape": "dot"}, {"id": "\uc88b\uc740 \ub188 \ub098\uc05c \ub188 \uc774\uc0c1\ud55c \ub188", "label": "\uc88b\uc740 \ub188 \ub098\uc05c \ub188 \uc774\uc0c1\ud55c \ub188", "shape": "dot"}, {"id": "\ubc15\uc950", "label": "\ubc15\uc950", "shape": "dot"}, {"id": "\ubc00\uc591", "label": "\ubc00\uc591", "shape": "dot"}, {"id": "\uad00\uc0c1", "label": "\uad00\uc0c1", "shape": "dot"}, {"id": "\ud478\ub978\uc18c\uae08", "label": "\ud478\ub978\uc18c\uae08", "shape": "dot"}, {"id": "\uc0b4\uc778\uc758 \ucd94\uc5b5", "label": "\uc0b4\uc778\uc758 \ucd94\uc5b5", "shape": "dot"}, {"id": "\ud6a8\uc790\ub3d9 \uc774\ubc1c\uc0ac", "label": "\ud6a8\uc790\ub3d9 \uc774\ubc1c\uc0ac", "shape": "dot"}, {"id": "\uc26c\ub9ac", "label": "\uc26c\ub9ac", "shape": "dot"}, {"id": "\uacf5\ub3d9\uacbd\ube44\uad6c\uc5ed JSA", "label": "\uacf5\ub3d9\uacbd\ube44\uad6c\uc5ed JSA", "shape": "dot"}, {"id": "\ud0dd\uc2dc\uc6b4\uc804\uc0ac", "label": "\ud0dd\uc2dc\uc6b4\uc804\uc0ac", "shape": "dot"}, {"id": "\uc758\ud615\uc81c", "label": "\uc758\ud615\uc81c", "shape": "dot"}, {"id": "\ubcc0\ud638\uc778", "label": "\ubcc0\ud638\uc778", "shape": "dot"}, {"id": "\ubc00\uc815", "label": "\ubc00\uc815", "shape": "dot"}, {"id": "\ud558\uc6b8\ub9c1", "label": "\ud558\uc6b8\ub9c1", "shape": "dot"}, {"id": "\uc774\uc120\uade0\n", "label": "\uc774\uc120\uade0\n", "shape": "dot"}, {"id": "PMC: \ub354 \ubc99\ucee4", "label": "PMC: \ub354 \ubc99\ucee4", "shape": "dot"}, {"id": "\ub05d\uae4c\uc9c0 \uac04\ub2e4", "label": "\ub05d\uae4c\uc9c0 \uac04\ub2e4", "shape": "dot"}, {"id": "\ub0b4 \uc544\ub0b4\uc758 \ubaa8\ub4e0 \uac83", "label": "\ub0b4 \uc544\ub0b4\uc758 \ubaa8\ub4e0 \uac83", "shape": "dot"}, {"id": "\ud558\uc580 \uac70\ud0d1", "label": "\ud558\uc580 \uac70\ud0d1", "shape": "dot"}, {"id": "\ud30c\uc8fc", "label": "\ud30c\uc8fc", "shape": "dot"}, {"id": "\ud30c\uc2a4\ud0c0", "label": "\ud30c\uc2a4\ud0c0", "shape": "dot"}, {"id": "\ud654\ucc28", "label": "\ud654\ucc28", "shape": "dot"}, {"id": "\uca68\uca68\ud55c \ub85c\ub9e8\uc2a4", "label": "\uca68\uca68\ud55c \ub85c\ub9e8\uc2a4", "shape": "dot"}, {"id": "\ucee4\ud53c \ud504\ub9b0\uc2a4 1\ud638\uc810", "label": "\ucee4\ud53c \ud504\ub9b0\uc2a4 1\ud638\uc810", "shape": "dot"}, {"id": "\uc131\ub09c \ubcc0\ud638\uc0ac", "label": "\uc131\ub09c \ubcc0\ud638\uc0ac", "shape": "dot"}, {"id": "\uc784\uae08\ub2d8\uc758 \uc0ac\uac74\uc218\ucca9", "label": "\uc784\uae08\ub2d8\uc758 \uc0ac\uac74\uc218\ucca9", "shape": "dot"}, {"id": "\uc545\uc9c8\uacbd\ucc30", "label": "\uc545\uc9c8\uacbd\ucc30", "shape": "dot"}, {"id": "\uc870\uc5ec\uc815\n", "label": "\uc870\uc5ec\uc815\n", "shape": "dot"}, {"id": "\uc6cc\ud0b9\uac78", "label": "\uc6cc\ud0b9\uac78", "shape": "dot"}, {"id": "\ubc29\uc790\uc804", "label": "\ubc29\uc790\uc804", "shape": "dot"}, {"id": "\uc778\uac04\uc911\ub3c5", "label": "\uc778\uac04\uc911\ub3c5", "shape": "dot"}, {"id": "\ud45c\uc801", "label": "\ud45c\uc801", "shape": "dot"}, {"id": "\ud6c4\uad81 : \uc81c\uc655\uc758 \ucca9", "label": "\ud6c4\uad81 : \uc81c\uc655\uc758 \ucca9", "shape": "dot"}, {"id": "\ucd5c\uc6b0\uc2dd\n", "label": "\ucd5c\uc6b0\uc2dd\n", "shape": "dot"}, {"id": "\ub9c8\ub140", "label": "\ub9c8\ub140", "shape": "dot"}, {"id": "\uc625\ud0d1\ubc29 \uc655\uc138\uc790", "label": "\uc625\ud0d1\ubc29 \uc655\uc138\uc790", "shape": "dot"}, {"id": "\ubd80\uc0b0\ud589", "label": "\ubd80\uc0b0\ud589", "shape": "dot"}, {"id": "\ubb3c\uad34", "label": "\ubb3c\uad34", "shape": "dot"}, {"id": "\ubc15\uc18c\ub2f4\n", "label": "\ubc15\uc18c\ub2f4\n", "shape": "dot"}, {"id": "\ubdf0\ud2f0\ud480 \ub9c8\uc778\ub4dc", "label": "\ubdf0\ud2f0\ud480 \ub9c8\uc778\ub4dc", "shape": "dot"}, {"id": "\uc774\uc815\uc740\n", "label": "\uc774\uc815\uc740\n", "shape": "dot"}, {"id": "\uc7a5\ud61c\uc9c4\n", "label": "\uc7a5\ud61c\uc9c4\n", "shape": "dot"}, {"id": "\uadf9\ud55c\uc9c1\uc5c5", "label": "\uadf9\ud55c\uc9c1\uc5c5", "shape": "dot"}, {"id": "\ub958\uc2b9\ub8e1\n", "label": "\ub958\uc2b9\ub8e1\n", "shape": "dot"}, {"id": "\uc190\ub2d8", "label": "\uc190\ub2d8", "shape": "dot"}, {"id": "\uc11c\uc6b8\uc5ed", "label": "\uc11c\uc6b8\uc5ed", "shape": "dot"}, {"id": "\uba85\ub7c9", "label": "\uba85\ub7c9", "shape": "dot"}, {"id": "\uace0\uc9c0\uc804", "label": "\uace0\uc9c0\uc804", "shape": "dot"}, {"id": "\uc2dc\ud06c\ub9bf", "label": "\uc2dc\ud06c\ub9bf", "shape": "dot"}, {"id": "\uc5fc\ub825", "label": "\uc5fc\ub825", "shape": "dot"}, {"id": "\ub3c4\ub9ac\ud654\uac00", "label": "\ub3c4\ub9ac\ud654\uac00", "shape": "dot"}, {"id": "7\ubc88\ubc29\uc758 \uc120\ubb3c", "label": "7\ubc88\ubc29\uc758 \uc120\ubb3c", "shape": "dot"}, {"id": "\uad11\ud574 \uc655\uc774 \ub41c \ub0a8\uc790", "label": "\uad11\ud574 \uc655\uc774 \ub41c \ub0a8\uc790", "shape": "dot"}, {"id": "7\ub144\uc758 \ubc24", "label": "7\ub144\uc758 \ubc24", "shape": "dot"}, {"id": "\ucd5c\uc885\ubcd1\uae30 \ud65c", "label": "\ucd5c\uc885\ubcd1\uae30 \ud65c", "shape": "dot"}, {"id": "\ub0b4 \uc0ac\ub791", "label": "\ub0b4 \uc0ac\ub791", "shape": "dot"}, {"id": "\uac70\ub8e9\ud55c \uacc4\ubcf4", "label": "\uac70\ub8e9\ud55c \uacc4\ubcf4", "shape": "dot"}, {"id": "\ud3c9\uc591\uc131", "label": "\ud3c9\uc591\uc131", "shape": "dot"}, {"id": "\uc774\ud558\ub2ac\n", "label": "\uc774\ud558\ub2ac\n", "shape": "dot"}, {"id": "\uce68\ubb35", "label": "\uce68\ubb35", "shape": "dot"}, {"id": "\uc0c1\uc5b4", "label": "\uc0c1\uc5b4", "shape": "dot"}, {"id": "\uc5f0\uac00\uc2dc", "label": "\uc5f0\uac00\uc2dc", "shape": "dot"}, {"id": "\ubd80\ub77c\ub354", "label": "\ubd80\ub77c\ub354", "shape": "dot"}, {"id": "\ube5b\ub098\uac70\ub098 \ubbf8\uce58\uac70\ub098", "label": "\ube5b\ub098\uac70\ub098 \ubbf8\uce58\uac70\ub098", "shape": "dot"}, {"id": "\ud0c0\uc9dc-\uc2e0\uc758 \uc190", "label": "\ud0c0\uc9dc-\uc2e0\uc758 \uc190", "shape": "dot"}, {"id": "\uc9c4\uc120\uaddc\n", "label": "\uc9c4\uc120\uaddc\n", "shape": "dot"}, {"id": "\uc774\ub3d9\ud718\n", "label": "\uc774\ub3d9\ud718\n", "shape": "dot"}, {"id": "\uc5b4\ub9b0 \uc758\ub8b0\uc778", "label": "\uc5b4\ub9b0 \uc758\ub8b0\uc778", "shape": "dot"}, {"id": "\uacf5\uba85\n", "label": "\uacf5\uba85\n", "shape": "dot"}, {"id": "\uae40\ub2e4\ubbf8\n", "label": "\uae40\ub2e4\ubbf8\n", "shape": "dot"}, {"id": "\uc870\ubbfc\uc218\n", "label": "\uc870\ubbfc\uc218\n", "shape": "dot"}, {"id": "\ud06c\ub9ac\uc2a4\ub9c8\uc2a4\uc5d0 \ub208\uc774 \uc62c\uae4c\uc694?", "label": "\ud06c\ub9ac\uc2a4\ub9c8\uc2a4\uc5d0 \ub208\uc774 \uc62c\uae4c\uc694?", "shape": "dot"}, {"id": "\ubc15\ud76c\uc21c\n", "label": "\ubc15\ud76c\uc21c\n", "shape": "dot"}, {"id": "\uc138\ube10 \ub370\uc774\uc988", "label": "\uc138\ube10 \ub370\uc774\uc988", "shape": "dot"}, {"id": "\uba38\ub2c8\ubc31", "label": "\uba38\ub2c8\ubc31", "shape": "dot"}, {"id": "1987", "label": "1987", "shape": "dot"}, {"id": "\ub0b4 \uc5f0\uc560\uc758 \ubaa8\ub4e0 \uac83", "label": "\ub0b4 \uc5f0\uc560\uc758 \ubaa8\ub4e0 \uac83", "shape": "dot"}, {"id": "10\uc5b5", "label": "10\uc5b5", "shape": "dot"}, {"id": "\ud5e8\uc824\uacfc \uadf8\ub808\ud154", "label": "\ud5e8\uc824\uacfc \uadf8\ub808\ud154", "shape": "dot"}, {"id": "\ub0a8\ud55c\uc0b0\uc131", "label": "\ub0a8\ud55c\uc0b0\uc131", "shape": "dot"}, {"id": "\uc791\uc804", "label": "\uc791\uc804", "shape": "dot"}, {"id": "\ube0c\uc774\uc544\uc774\ud53c", "label": "\ube0c\uc774\uc544\uc774\ud53c", "shape": "dot"}, {"id": "\uc6b0\ub9ac \uc9d1\uc5d0 \uc65c \uc654\ub2c8", "label": "\uc6b0\ub9ac \uc9d1\uc5d0 \uc65c \uc654\ub2c8", "shape": "dot"}, {"id": "\uc36c\ud0a4\uc2a4 \ud328\ubc00\ub9ac", "label": "\uc36c\ud0a4\uc2a4 \ud328\ubc00\ub9ac", "shape": "dot"}, {"id": "\uc6a9\uc758\uc790", "label": "\uc6a9\uc758\uc790", "shape": "dot"}, {"id": "\uac04\uae30\ub0a8", "label": "\uac04\uae30\ub0a8", "shape": "dot"}, {"id": "\uc758\ub8b0\uc778", "label": "\uc758\ub8b0\uc778", "shape": "dot"}, {"id": "\ub9ac\ubca4\uc838", "label": "\ub9ac\ubca4\uc838", "shape": "dot"}, {"id": "\ub9e8\ubc1c\uc758 \uafc8", "label": "\ub9e8\ubc1c\uc758 \uafc8", "shape": "dot"}, {"id": "\ubcf4\ud5e4\ubbf8\uc548 \ub7a9\uc18c\ub514", "label": "\ubcf4\ud5e4\ubbf8\uc548 \ub7a9\uc18c\ub514", "shape": "dot"}, {"id": "\ub77c\ubbf8\ub9d0\ub809\n", "label": "\ub77c\ubbf8\ub9d0\ub809\n", "shape": "dot"}, {"id": "\ub8e8\uc2dc\ubcf4\uc778\ud134\n", "label": "\ub8e8\uc2dc\ubcf4\uc778\ud134\n", "shape": "dot"}, {"id": "\uadc8\ub9bc\ub9ac\n", "label": "\uadc8\ub9bc\ub9ac\n", "shape": "dot"}, {"id": "\ubca4\ud558\ub514\n", "label": "\ubca4\ud558\ub514\n", "shape": "dot"}, {"id": "\uacf5\uc720\n", "label": "\uacf5\uc720\n", "shape": "dot"}, {"id": "\ube45", "label": "\ube45", "shape": "dot"}, {"id": "\uae40\uc885\uc6b1 \ucc3e\uae30", "label": "\uae40\uc885\uc6b1 \ucc3e\uae30", "shape": "dot"}, {"id": "\ub0a8\uacfc \uc5ec", "label": "\ub0a8\uacfc \uc5ec", "shape": "dot"}, {"id": "\ub3c4\uac00\ub2c8", "label": "\ub3c4\uac00\ub2c8", "shape": "dot"}, {"id": "\uc815\uc720\ubbf8\n", "label": "\uc815\uc720\ubbf8\n", "shape": "dot"}, {"id": "\ub0b4 \uae61\ud328 \uac19\uc740 \uc560\uc778", "label": "\ub0b4 \uae61\ud328 \uac19\uc740 \uc560\uc778", "shape": "dot"}, {"id": "\uc9c1\uc7a5\uc758 \uc2e0", "label": "\uc9c1\uc7a5\uc758 \uc2e0", "shape": "dot"}, {"id": "\uc5f0\uc560\uc758 \ubc1c\uacac", "label": "\uc5f0\uc560\uc758 \ubc1c\uacac", "shape": "dot"}, {"id": "\ucc28\uc6b0", "label": "\ucc28\uc6b0", "shape": "dot"}, {"id": "\ud130\ub110 3D", "label": "\ud130\ub110 3D", "shape": "dot"}, {"id": "\ucc9c\uc77c\uc758 \uc57d\uc18d", "label": "\ucc9c\uc77c\uc758 \uc57d\uc18d", "shape": "dot"}, {"id": "\ub9c8\ub3d9\uc11d\n", "label": "\ub9c8\ub3d9\uc11d\n", "shape": "dot"}, {"id": "\uc0c1\uc758\uc6d0", "label": "\uc0c1\uc758\uc6d0", "shape": "dot"}, {"id": "\uc774\uc6c3\uc0ac\ub78c", "label": "\uc774\uc6c3\uc0ac\ub78c", "shape": "dot"}, {"id": "\ud568\uc815", "label": "\ud568\uc815", "shape": "dot"}, {"id": "\uc545\uc778\uc804", "label": "\uc545\uc778\uc804", "shape": "dot"}, {"id": "\uad7f\ubc14\uc774 \uc2f1\uae00", "label": "\uad7f\ubc14\uc774 \uc2f1\uae00", "shape": "dot"}, {"id": "\ub450 \ub0a8\uc790", "label": "\ub450 \ub0a8\uc790", "shape": "dot"}, {"id": "\ubc94\uc8c4\ub3c4\uc2dc", "label": "\ubc94\uc8c4\ub3c4\uc2dc", "shape": "dot"}, {"id": "\uacf5\uc815\uc0ac\ud68c", "label": "\uacf5\uc815\uc0ac\ud68c", "shape": "dot"}, {"id": "\ud1b5\uc99d", "label": "\ud1b5\uc99d", "shape": "dot"}, {"id": "\ucc54\ud53c\uc5b8", "label": "\ucc54\ud53c\uc5b8", "shape": "dot"}, {"id": "\uc131\ub09c\ud669\uc18c", "label": "\uc131\ub09c\ud669\uc18c", "shape": "dot"}, {"id": "\uc2e0\uacfc\ud568\uaed8-\uc778\uacfc \uc5f0", "label": "\uc2e0\uacfc\ud568\uaed8-\uc778\uacfc \uc5f0", "shape": "dot"}, {"id": "\ub178\ub9ac\uac1c: \uadf8\ub140\uc758 \ub208\ubb3c", "label": "\ub178\ub9ac\uac1c: \uadf8\ub140\uc758 \ub208\ubb3c", "shape": "dot"}, {"id": "\uc2e0\uacfc\ud568\uaed8-\uc8c4\uc640 \ubc8c", "label": "\uc2e0\uacfc\ud568\uaed8-\uc8c4\uc640 \ubc8c", "shape": "dot"}, {"id": "\ub3d9\ub124\uc0ac\ub78c\ub4e4", "label": "\ub3d9\ub124\uc0ac\ub78c\ub4e4", "shape": "dot"}, {"id": "\ub354 \ud30c\uc774\ube0c", "label": "\ub354 \ud30c\uc774\ube0c", "shape": "dot"}, {"id": "\uc0b4\uc778\uc790", "label": "\uc0b4\uc778\uc790", "shape": "dot"}, {"id": "\uc6d0\ub354\ud480 \uace0\uc2a4\ud2b8", "label": "\uc6d0\ub354\ud480 \uace0\uc2a4\ud2b8", "shape": "dot"}, {"id": "\uacb0\ud63c\uc804\uc57c", "label": "\uacb0\ud63c\uc804\uc57c", "shape": "dot"}, {"id": "\uae40\uc218\uc548\n", "label": "\uae40\uc218\uc548\n", "shape": "dot"}, {"id": "\uad70\ud568\ub3c4", "label": "\uad70\ud568\ub3c4", "shape": "dot"}, {"id": "\uae40\uc758\uc131\n", "label": "\uae40\uc758\uc131\n", "shape": "dot"}, {"id": "\uace8\ub4e0\uc2ac\ub7fc\ubc84", "label": "\uace8\ub4e0\uc2ac\ub7fc\ubc84", "shape": "dot"}, {"id": "\uc548\uc18c\ud76c\n", "label": "\uc548\uc18c\ud76c\n", "shape": "dot"}, {"id": "\uc2f1\uae00\ub77c\uc774\ub354", "label": "\uc2f1\uae00\ub77c\uc774\ub354", "shape": "dot"}, {"id": "\ubc30\uc2ec\uc6d0\ub4e4", "label": "\ubc30\uc2ec\uc6d0\ub4e4", "shape": "dot"}, {"id": "\ubb38\uc18c\ub9ac\n", "label": "\ubb38\uc18c\ub9ac\n", "shape": "dot"}, {"id": "\ubc15\ud558\uc0ac\ud0d5", "label": "\ubc15\ud558\uc0ac\ud0d5", "shape": "dot"}, {"id": "\uc2a4\ud30c\uc774", "label": "\uc2a4\ud30c\uc774", "shape": "dot"}, {"id": "\uc624\uc544\uc2dc\uc2a4", "label": "\uc624\uc544\uc2dc\uc2a4", "shape": "dot"}, {"id": "\uc6b0\ub9ac \uc0dd\uc560 \ucd5c\uace0\uc758 \uc21c\uac04", "label": "\uc6b0\ub9ac \uc0dd\uc560 \ucd5c\uace0\uc758 \uc21c\uac04", "shape": "dot"}, {"id": "\ud2b9\ubcc4\uc2dc\ubbfc", "label": "\ud2b9\ubcc4\uc2dc\ubbfc", "shape": "dot"}, {"id": "\ubd84\ub178\uc758 \uc724\ub9ac\ud559", "label": "\ubd84\ub178\uc758 \uc724\ub9ac\ud559", "shape": "dot"}, {"id": "\ub9ac\ud2c0 \ud3ec\ub808\uc2a4\ud2b8", "label": "\ub9ac\ud2c0 \ud3ec\ub808\uc2a4\ud2b8", "shape": "dot"}, {"id": "\ubc15\ud615\uc2dd\n", "label": "\ubc15\ud615\uc2dd\n", "shape": "dot"}, {"id": "\uac78\uce85\uc2a4", "label": "\uac78\uce85\uc2a4", "shape": "dot"}, {"id": "\ub77c\ubbf8\ub780\n", "label": "\ub77c\ubbf8\ub780\n", "shape": "dot"}, {"id": "\ub450 \uac1c\uc758 \ub2ec", "label": "\ub450 \uac1c\uc758 \ub2ec", "shape": "dot"}, {"id": "\ub0b4\uc548\uc758 \uadf8\ub188", "label": "\ub0b4\uc548\uc758 \uadf8\ub188", "shape": "dot"}, {"id": "\ubd09\uc774 \uae40\uc120\ub2ec", "label": "\ubd09\uc774 \uae40\uc120\ub2ec", "shape": "dot"}, {"id": "\uc774\uc131\uacbd\n", "label": "\uc774\uc131\uacbd\n", "shape": "dot"}, {"id": "\ub808\uc2ac\ub7ec", "label": "\ub808\uc2ac\ub7ec", "shape": "dot"}, {"id": "\ud074\ub808\uba58\ud0c0\uc778", "label": "\ud074\ub808\uba58\ud0c0\uc778", "shape": "dot"}, {"id": "\uc774\ub3d9\uc900\n", "label": "\uc774\ub3d9\uc900\n", "shape": "dot"}, {"id": "\uae40\ud61c\ub9ac\n", "label": "\uae40\ud61c\ub9ac\n", "shape": "dot"}, {"id": "\uc2a4\ud2f0\ube10\uc2dc\uac78\n", "label": "\uc2a4\ud2f0\ube10\uc2dc\uac78\n", "shape": "dot"}, {"id": "\uc2a4\ud2f0\ube10\uc2dc\uac78\uc758 \uc791\uc804\uba85 \uace0\uc2a4\ud2b8", "label": "\uc2a4\ud2f0\ube10\uc2dc\uac78\uc758 \uc791\uc804\uba85 \uace0\uc2a4\ud2b8", "shape": "dot"}, {"id": "\uc704\ud5d8\ud55c \ub0a8\uc790", "label": "\uc704\ud5d8\ud55c \ub0a8\uc790", "shape": "dot"}, {"id": "\uc740\uc11c\uc6b0\n", "label": "\uc740\uc11c\uc6b0\n", "shape": "dot"}, {"id": "\uae40\ud0dc\ub9ac\n", "label": "\uae40\ud0dc\ub9ac\n", "shape": "dot"}, {"id": "\ub958\uc900\uc5f4\n", "label": "\ub958\uc900\uc5f4\n", "shape": "dot"}, {"id": "\ub3c5\uc804", "label": "\ub3c5\uc804", "shape": "dot"}, {"id": "\ub3c8", "label": "\ub3c8", "shape": "dot"}, {"id": "\ub354 \ud0b9", "label": "\ub354 \ud0b9", "shape": "dot"}, {"id": "\uc18c\uc15c\ud3ec\ube44\uc544", "label": "\uc18c\uc15c\ud3ec\ube44\uc544", "shape": "dot"}, {"id": "\ube91\ubc18", "label": "\ube91\ubc18", "shape": "dot"}, {"id": "\uc9c4\uae30\uc8fc\n", "label": "\uc9c4\uae30\uc8fc\n", "shape": "dot"}, {"id": "\uc54c\ub77c\ub518", "label": "\uc54c\ub77c\ub518", "shape": "dot"}, {"id": "\uba54\ub098\ub9c8\uc218\ub4dc\n", "label": "\uba54\ub098\ub9c8\uc218\ub4dc\n", "shape": "dot"}, {"id": "\uc70c\uc2a4\ubbf8\uc2a4\n", "label": "\uc70c\uc2a4\ubbf8\uc2a4\n", "shape": "dot"}, {"id": "\uc138\ube10 \ud30c\uc6b4\uc988", "label": "\uc138\ube10 \ud30c\uc6b4\uc988", "shape": "dot"}, {"id": "Mr. \ud788\uce58 - \ub2f9\uc2e0\uc744 \uc704\ud55c \ub370\uc774\ud2b8 \ucf54..", "label": "Mr. \ud788\uce58 - \ub2f9\uc2e0\uc744 \uc704\ud55c \ub370\uc774\ud2b8 \ucf54..", "shape": "dot"}, {"id": "\uc218\uc5b4\uc0ac\uc774\ub4dc \uc2a4\ucffc\ub4dc", "label": "\uc218\uc5b4\uc0ac\uc774\ub4dc \uc2a4\ucffc\ub4dc", "shape": "dot"}, {"id": "\ub098\uc05c \ub140\uc11d\ub4e4 2", "label": "\ub098\uc05c \ub140\uc11d\ub4e4 2", "shape": "dot"}, {"id": "\uc544\uc774 \ub85c\ubd07", "label": "\uc544\uc774 \ub85c\ubd07", "shape": "dot"}, {"id": "\ud578\ucf55", "label": "\ud578\ucf55", "shape": "dot"}, {"id": "\ub098\ub294 \uc804\uc124\uc774\ub2e4", "label": "\ub098\ub294 \uc804\uc124\uc774\ub2e4", "shape": "dot"}, {"id": "\uc5d0\ub108\ubbf8 \uc624\ube0c \uc2a4\ud14c\uc774\ud2b8", "label": "\uc5d0\ub108\ubbf8 \uc624\ube0c \uc2a4\ud14c\uc774\ud2b8", "shape": "dot"}, {"id": "\uc560\ud504\ud130 \uc5b4\uc2a4", "label": "\uc560\ud504\ud130 \uc5b4\uc2a4", "shape": "dot"}, {"id": "\uc778\ub514\ud39c\ub358\uc2a4 \ub370\uc774", "label": "\uc778\ub514\ud39c\ub358\uc2a4 \ub370\uc774", "shape": "dot"}, {"id": "\ub098\uc624\ubbf8\uc2a4\ucf67\n", "label": "\ub098\uc624\ubbf8\uc2a4\ucf67\n", "shape": "dot"}, {"id": "\ud30c\uc6cc\ub808\uc778\uc838\uc2a4: \ub354 \ube44\uae30\ub2dd", "label": "\ud30c\uc6cc\ub808\uc778\uc838\uc2a4: \ub354 \ube44\uae30\ub2dd", "shape": "dot"}]);
+        edges = new vis.DataSet([{"from": "\uae30\uc0dd\ucda9", "to": "\uc1a1\uac15\ud638\n"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uc6b0\uc544\ud55c \uc138\uacc4"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uc124\uad6d\uc5f4\ucc28"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uc0ac\ub3c4"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ub9c8\uc57d\uc655"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uad34\ubb3c"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uc88b\uc740 \ub188 \ub098\uc05c \ub188 \uc774\uc0c1\ud55c \ub188"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ubc15\uc950"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ubc00\uc591"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uad00\uc0c1"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ud478\ub978\uc18c\uae08"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uc0b4\uc778\uc758 \ucd94\uc5b5"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ud6a8\uc790\ub3d9 \uc774\ubc1c\uc0ac"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uc26c\ub9ac"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uacf5\ub3d9\uacbd\ube44\uad6c\uc5ed JSA"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ud0dd\uc2dc\uc6b4\uc804\uc0ac"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\uc758\ud615\uc81c"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ubcc0\ud638\uc778"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ubc00\uc815"}, {"from": "\uc1a1\uac15\ud638\n", "to": "\ud558\uc6b8\ub9c1"}, {"from": "\uae30\uc0dd\ucda9", "to": "\uc774\uc120\uade0\n"}, {"from": "\uc774\uc120\uade0\n", "to": "PMC: \ub354 \ubc99\ucee4"}, {"from": "\uc774\uc120\uade0\n", "to": "\ub05d\uae4c\uc9c0 \uac04\ub2e4"}, {"from": "\uc774\uc120\uade0\n", "to": "\ub0b4 \uc544\ub0b4\uc758 \ubaa8\ub4e0 \uac83"}, {"from": "\uc774\uc120\uade0\n", "to": "\ud558\uc580 \uac70\ud0d1"}, {"from": "\uc774\uc120\uade0\n", "to": "\ud30c\uc8fc"}, {"from": "\uc774\uc120\uade0\n", "to": "\ud30c\uc2a4\ud0c0"}, {"from": "\uc774\uc120\uade0\n", "to": "\ud654\ucc28"}, {"from": "\uc774\uc120\uade0\n", "to": "\uca68\uca68\ud55c \ub85c\ub9e8\uc2a4"}, {"from": "\uc774\uc120\uade0\n", "to": "\ucee4\ud53c \ud504\ub9b0\uc2a4 1\ud638\uc810"}, {"from": "\uc774\uc120\uade0\n", "to": "\uc131\ub09c \ubcc0\ud638\uc0ac"}, {"from": "\uc774\uc120\uade0\n", "to": "\uc784\uae08\ub2d8\uc758 \uc0ac\uac74\uc218\ucca9"}, {"from": "\uc774\uc120\uade0\n", "to": "\uc545\uc9c8\uacbd\ucc30"}, {"from": "\uae30\uc0dd\ucda9", "to": "\uc870\uc5ec\uc815\n"}, {"from": "\uc870\uc5ec\uc815\n", "to": "\uc6cc\ud0b9\uac78"}, {"from": "\uc870\uc5ec\uc815\n", "to": "\ubc29\uc790\uc804"}, {"from": "\uc870\uc5ec\uc815\n", "to": "\uc778\uac04\uc911\ub3c5"}, {"from": "\uc870\uc5ec\uc815\n", "to": "\ud45c\uc801"}, {"from": "\uc870\uc5ec\uc815\n", "to": "\ud6c4\uad81 : \uc81c\uc655\uc758 \ucca9"}, {"from": "\uae30\uc0dd\ucda9", "to": "\ucd5c\uc6b0\uc2dd\n"}, {"from": "\ucd5c\uc6b0\uc2dd\n", "to": "\ub9c8\ub140"}, {"from": "\ucd5c\uc6b0\uc2dd\n", "to": "\uc625\ud0d1\ubc29 \uc655\uc138\uc790"}, {"from": "\ucd5c\uc6b0\uc2dd\n", "to": "\ubd80\uc0b0\ud589"}, {"from": "\ucd5c\uc6b0\uc2dd\n", "to": "\ubb3c\uad34"}, {"from": "\uae30\uc0dd\ucda9", "to": "\ubc15\uc18c\ub2f4\n"}, {"from": "\ubc15\uc18c\ub2f4\n", "to": "\ubdf0\ud2f0\ud480 \ub9c8\uc778\ub4dc"}, {"from": "\uae30\uc0dd\ucda9", "to": "\uc774\uc815\uc740\n"}, {"from": "\uae30\uc0dd\ucda9", "to": "\uc7a5\ud61c\uc9c4\n"}, {"from": "\uadf9\ud55c\uc9c1\uc5c5", "to": "\ub958\uc2b9\ub8e1\n"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\uc190\ub2d8"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\uc11c\uc6b8\uc5ed"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\uba85\ub7c9"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\ub0b4 \uc544\ub0b4\uc758 \ubaa8\ub4e0 \uac83"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\uace0\uc9c0\uc804"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\uc2dc\ud06c\ub9bf"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\uc5fc\ub825"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\ub3c4\ub9ac\ud654\uac00"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "7\ubc88\ubc29\uc758 \uc120\ubb3c"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\uad11\ud574 \uc655\uc774 \ub41c \ub0a8\uc790"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "7\ub144\uc758 \ubc24"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\ucd5c\uc885\ubcd1\uae30 \ud65c"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\ub0b4 \uc0ac\ub791"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\uac70\ub8e9\ud55c \uacc4\ubcf4"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\ud3c9\uc591\uc131"}, {"from": "\ub958\uc2b9\ub8e1\n", "to": "\ud45c\uc801"}, {"from": "\uadf9\ud55c\uc9c1\uc5c5", "to": "\uc774\ud558\ub2ac\n"}, {"from": "\uc774\ud558\ub2ac\n", "to": "\ud30c\uc2a4\ud0c0"}, {"from": "\uc774\ud558\ub2ac\n", "to": "\uce68\ubb35"}, {"from": "\uc774\ud558\ub2ac\n", "to": "\uc0c1\uc5b4"}, {"from": "\uc774\ud558\ub2ac\n", "to": "\uc5f0\uac00\uc2dc"}, {"from": "\uc774\ud558\ub2ac\n", "to": "\ubd80\ub77c\ub354"}, {"from": "\uc774\ud558\ub2ac\n", "to": "\ube5b\ub098\uac70\ub098 \ubbf8\uce58\uac70\ub098"}, {"from": "\uc774\ud558\ub2ac\n", "to": "\ud0c0\uc9dc-\uc2e0\uc758 \uc190"}, {"from": "\uadf9\ud55c\uc9c1\uc5c5", "to": "\uc9c4\uc120\uaddc\n"}, {"from": "\uadf9\ud55c\uc9c1\uc5c5", "to": "\uc774\ub3d9\ud718\n"}, {"from": "\uc774\ub3d9\ud718\n", "to": "\ubd80\ub77c\ub354"}, {"from": "\uc774\ub3d9\ud718\n", "to": "\uc5b4\ub9b0 \uc758\ub8b0\uc778"}, {"from": "\uadf9\ud55c\uc9c1\uc5c5", "to": "\uacf5\uba85\n"}, {"from": "\ub9c8\ub140", "to": "\uae40\ub2e4\ubbf8\n"}, {"from": "\ub9c8\ub140", "to": "\uc870\ubbfc\uc218\n"}, {"from": "\uc870\ubbfc\uc218\n", "to": "\ud06c\ub9ac\uc2a4\ub9c8\uc2a4\uc5d0 \ub208\uc774 \uc62c\uae4c\uc694?"}, {"from": "\ub9c8\ub140", "to": "\ubc15\ud76c\uc21c\n"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\uc138\ube10 \ub370\uc774\uc988"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\uba38\ub2c8\ubc31"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "1987"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\ub0b4 \uc5f0\uc560\uc758 \ubaa8\ub4e0 \uac83"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "10\uc5b5"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\ud5e8\uc824\uacfc \uadf8\ub808\ud154"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\ub0a8\ud55c\uc0b0\uc131"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\uc791\uc804"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\ube0c\uc774\uc544\uc774\ud53c"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\uc6b0\ub9ac \uc9d1\uc5d0 \uc65c \uc654\ub2c8"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\uc36c\ud0a4\uc2a4 \ud328\ubc00\ub9ac"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\uc6a9\uc758\uc790"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\uac04\uae30\ub0a8"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\uc758\ub8b0\uc778"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\ub9ac\ubca4\uc838"}, {"from": "\ubc15\ud76c\uc21c\n", "to": "\ub9e8\ubc1c\uc758 \uafc8"}, {"from": "\ubcf4\ud5e4\ubbf8\uc548 \ub7a9\uc18c\ub514", "to": "\ub77c\ubbf8\ub9d0\ub809\n"}, {"from": "\ubcf4\ud5e4\ubbf8\uc548 \ub7a9\uc18c\ub514", "to": "\ub8e8\uc2dc\ubcf4\uc778\ud134\n"}, {"from": "\ubcf4\ud5e4\ubbf8\uc548 \ub7a9\uc18c\ub514", "to": "\uadc8\ub9bc\ub9ac\n"}, {"from": "\ubcf4\ud5e4\ubbf8\uc548 \ub7a9\uc18c\ub514", "to": "\ubca4\ud558\ub514\n"}, {"from": "\ubd80\uc0b0\ud589", "to": "\uacf5\uc720\n"}, {"from": "\uacf5\uc720\n", "to": "\ube45"}, {"from": "\uacf5\uc720\n", "to": "\uae40\uc885\uc6b1 \ucc3e\uae30"}, {"from": "\uacf5\uc720\n", "to": "\ub0a8\uacfc \uc5ec"}, {"from": "\uacf5\uc720\n", "to": "\uc6a9\uc758\uc790"}, {"from": "\uacf5\uc720\n", "to": "\ucee4\ud53c \ud504\ub9b0\uc2a4 1\ud638\uc810"}, {"from": "\uacf5\uc720\n", "to": "\ub3c4\uac00\ub2c8"}, {"from": "\uacf5\uc720\n", "to": "\ubc00\uc815"}, {"from": "\ubd80\uc0b0\ud589", "to": "\uc815\uc720\ubbf8\n"}, {"from": "\uc815\uc720\ubbf8\n", "to": "\ub0b4 \uae61\ud328 \uac19\uc740 \uc560\uc778"}, {"from": "\uc815\uc720\ubbf8\n", "to": "\uc9c1\uc7a5\uc758 \uc2e0"}, {"from": "\uc815\uc720\ubbf8\n", "to": "10\uc5b5"}, {"from": "\uc815\uc720\ubbf8\n", "to": "\uc625\ud0d1\ubc29 \uc655\uc138\uc790"}, {"from": "\uc815\uc720\ubbf8\n", "to": "\uc5f0\uc560\uc758 \ubc1c\uacac"}, {"from": "\uc815\uc720\ubbf8\n", "to": "\ucc28\uc6b0"}, {"from": "\uc815\uc720\ubbf8\n", "to": "\ub3c4\uac00\ub2c8"}, {"from": "\uc815\uc720\ubbf8\n", "to": "\ud130\ub110 3D"}, {"from": "\uc815\uc720\ubbf8\n", "to": "\ucc9c\uc77c\uc758 \uc57d\uc18d"}, {"from": "\ubd80\uc0b0\ud589", "to": "\ub9c8\ub3d9\uc11d\n"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uc0c1\uc758\uc6d0"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uc774\uc6c3\uc0ac\ub78c"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ud568\uc815"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uc545\uc778\uc804"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uad7f\ubc14\uc774 \uc2f1\uae00"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ub450 \ub0a8\uc790"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ubc94\uc8c4\ub3c4\uc2dc"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uacf5\uc815\uc0ac\ud68c"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ud1b5\uc99d"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ucc54\ud53c\uc5b8"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uc131\ub09c\ud669\uc18c"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uc2e0\uacfc\ud568\uaed8-\uc778\uacfc \uc5f0"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ub178\ub9ac\uac1c: \uadf8\ub140\uc758 \ub208\ubb3c"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uc2e0\uacfc\ud568\uaed8-\uc8c4\uc640 \ubc8c"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ubd80\ub77c\ub354"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ub3d9\ub124\uc0ac\ub78c\ub4e4"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\ub354 \ud30c\uc774\ube0c"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uc0b4\uc778\uc790"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uc6d0\ub354\ud480 \uace0\uc2a4\ud2b8"}, {"from": "\ub9c8\ub3d9\uc11d\n", "to": "\uacb0\ud63c\uc804\uc57c"}, {"from": "\ubd80\uc0b0\ud589", "to": "\uae40\uc218\uc548\n"}, {"from": "\uae40\uc218\uc548\n", "to": "\uad70\ud568\ub3c4"}, {"from": "\ubd80\uc0b0\ud589", "to": "\uae40\uc758\uc131\n"}, {"from": "\uae40\uc758\uc131\n", "to": "\uace8\ub4e0\uc2ac\ub7fc\ubc84"}, {"from": "\ubd80\uc0b0\ud589", "to": "\uc548\uc18c\ud76c\n"}, {"from": "\uc548\uc18c\ud76c\n", "to": "\uc2f1\uae00\ub77c\uc774\ub354"}, {"from": "\ubc30\uc2ec\uc6d0\ub4e4", "to": "\ubb38\uc18c\ub9ac\n"}, {"from": "\ubb38\uc18c\ub9ac\n", "to": "\ubc15\ud558\uc0ac\ud0d5"}, {"from": "\ubb38\uc18c\ub9ac\n", "to": "\uc2a4\ud30c\uc774"}, {"from": "\ubb38\uc18c\ub9ac\n", "to": "\uc624\uc544\uc2dc\uc2a4"}, {"from": "\ubb38\uc18c\ub9ac\n", "to": "\uc6b0\ub9ac \uc0dd\uc560 \ucd5c\uace0\uc758 \uc21c\uac04"}, {"from": "\ubb38\uc18c\ub9ac\n", "to": "\ud2b9\ubcc4\uc2dc\ubbfc"}, {"from": "\ubb38\uc18c\ub9ac\n", "to": "\ud6a8\uc790\ub3d9 \uc774\ubc1c\uc0ac"}, {"from": "\ubb38\uc18c\ub9ac\n", "to": "\ubd84\ub178\uc758 \uc724\ub9ac\ud559"}, {"from": "\ubb38\uc18c\ub9ac\n", "to": "\ub9ac\ud2c0 \ud3ec\ub808\uc2a4\ud2b8"}, {"from": "\ubc30\uc2ec\uc6d0\ub4e4", "to": "\ubc15\ud615\uc2dd\n"}, {"from": "\uac78\uce85\uc2a4", "to": "\ub77c\ubbf8\ub780\n"}, {"from": "\ub77c\ubbf8\ub780\n", "to": "\ub450 \uac1c\uc758 \ub2ec"}, {"from": "\ub77c\ubbf8\ub780\n", "to": "\ub0b4\uc548\uc758 \uadf8\ub188"}, {"from": "\ub77c\ubbf8\ub780\n", "to": "\ubd09\uc774 \uae40\uc120\ub2ec"}, {"from": "\ub77c\ubbf8\ub780\n", "to": "\ud2b9\ubcc4\uc2dc\ubbfc"}, {"from": "\uac78\uce85\uc2a4", "to": "\uc774\uc131\uacbd\n"}, {"from": "\uc774\uc131\uacbd\n", "to": "\ub808\uc2ac\ub7ec"}, {"from": "\ud074\ub808\uba58\ud0c0\uc778", "to": "\uc774\ub3d9\uc900\n"}, {"from": "\ud074\ub808\uba58\ud0c0\uc778", "to": "\uae40\ud61c\ub9ac\n"}, {"from": "\ud074\ub808\uba58\ud0c0\uc778", "to": "\uc2a4\ud2f0\ube10\uc2dc\uac78\n"}, {"from": "\uc2a4\ud2f0\ube10\uc2dc\uac78\n", "to": "\uc2a4\ud2f0\ube10\uc2dc\uac78\uc758 \uc791\uc804\uba85 \uace0\uc2a4\ud2b8"}, {"from": "\uc2a4\ud2f0\ube10\uc2dc\uac78\n", "to": "\uc704\ud5d8\ud55c \ub0a8\uc790"}, {"from": "\ud074\ub808\uba58\ud0c0\uc778", "to": "\uc740\uc11c\uc6b0\n"}, {"from": "\ub9ac\ud2c0 \ud3ec\ub808\uc2a4\ud2b8", "to": "\uae40\ud0dc\ub9ac\n"}, {"from": "\uae40\ud0dc\ub9ac\n", "to": "1987"}, {"from": "\ub9ac\ud2c0 \ud3ec\ub808\uc2a4\ud2b8", "to": "\ub958\uc900\uc5f4\n"}, {"from": "\ub958\uc900\uc5f4\n", "to": "\ub3c5\uc804"}, {"from": "\ub958\uc900\uc5f4\n", "to": "\ub3c8"}, {"from": "\ub958\uc900\uc5f4\n", "to": "\ub354 \ud0b9"}, {"from": "\ub958\uc900\uc5f4\n", "to": "\uc18c\uc15c\ud3ec\ube44\uc544"}, {"from": "\ub958\uc900\uc5f4\n", "to": "\uce68\ubb35"}, {"from": "\ub958\uc900\uc5f4\n", "to": "\ube91\ubc18"}, {"from": "\ub958\uc900\uc5f4\n", "to": "\ud0dd\uc2dc\uc6b4\uc804\uc0ac"}, {"from": "\ub9ac\ud2c0 \ud3ec\ub808\uc2a4\ud2b8", "to": "\uc9c4\uae30\uc8fc\n"}, {"from": "\uc54c\ub77c\ub518", "to": "\uba54\ub098\ub9c8\uc218\ub4dc\n"}, {"from": "\uc54c\ub77c\ub518", "to": "\uc70c\uc2a4\ubbf8\uc2a4\n"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\uc138\ube10 \ud30c\uc6b4\uc988"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "Mr. \ud788\uce58 - \ub2f9\uc2e0\uc744 \uc704\ud55c \ub370\uc774\ud2b8 \ucf54.."}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\uc218\uc5b4\uc0ac\uc774\ub4dc \uc2a4\ucffc\ub4dc"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\ub098\uc05c \ub140\uc11d\ub4e4 2"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\uc544\uc774 \ub85c\ubd07"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\ud578\ucf55"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\ub098\ub294 \uc804\uc124\uc774\ub2e4"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\uc5d0\ub108\ubbf8 \uc624\ube0c \uc2a4\ud14c\uc774\ud2b8"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\uc560\ud504\ud130 \uc5b4\uc2a4"}, {"from": "\uc70c\uc2a4\ubbf8\uc2a4\n", "to": "\uc778\ub514\ud39c\ub358\uc2a4 \ub370\uc774"}, {"from": "\uc54c\ub77c\ub518", "to": "\ub098\uc624\ubbf8\uc2a4\ucf67\n"}, {"from": "\ub098\uc624\ubbf8\uc2a4\ucf67\n", "to": "\ud30c\uc6cc\ub808\uc778\uc838\uc2a4: \ub354 \ube44\uae30\ub2dd"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        // default to using dot shape for nodes
+        options.nodes = {
+            shape: "dot"
+        }
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+        network.on("stabilizationProgress", function(params) {
+      		document.getElementById('loadingBar').removeAttribute("style");
+	        var maxWidth = 496;
+	        var minWidth = 20;
+	        var widthFactor = params.iterations/params.total;
+	        var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	        document.getElementById('bar').style.width = width + 'px';
+	        document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	    });
+	    network.once("stabilizationIterationsDone", function() {
+	        document.getElementById('text').innerHTML = '100%';
+	        document.getElementById('bar').style.width = '496px';
+	        document.getElementById('loadingBar').style.opacity = 0;
+	        // really clean the dom element
+	        setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	    });
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
